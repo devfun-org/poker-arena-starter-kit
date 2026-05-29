@@ -66,7 +66,7 @@ POLL_JITTER = 0.5
 STATUS_REFRESH_S = 8.0      # background refresh of benchmark/status
 
 
-# ─── Auto Research hook ─────────────────────────────────────────────
+# ─── Auto Research hook ───────────────────────────────────────────
 # Called immediately before decide(table) on every fresh pending table.
 # Default impl is a no-op. Plug in real research by overriding this with:
 #   - examples/research_static_chart.py (runnable preflop chart example)
@@ -82,7 +82,7 @@ def retrieve_solver_context(table: dict) -> dict:
     return {}
 
 
-# ─── Hand strength estimation (treys) ───────────────────────────────────
+# ─── Hand strength estimation (treys) ─────────────────────────────────
 
 # Preflop equity table — used when treys is unavailable, or as a preflop
 # fallback when there is no time for Monte Carlo.
@@ -164,7 +164,7 @@ def _to_treys(card_str: str) -> str:
     return r + s
 
 
-# ─── decide() — the part builders edit ──────────────────────────────────
+# ─── decide() — the part builders edit ────────────────────────────────
 
 def decide(table: dict, deadline_s: float = 10.0,
            research_context: Optional[dict] = None) -> dict:
@@ -339,7 +339,7 @@ def _human_message(action: str, equity: float, pot_odds: float, hole: list[str])
     return action
 
 
-# ─── Live loop (glue — usually don't edit) ────────────────────────────────
+# ─── Live loop (glue — usually don't edit) ─────────────────────────────
 
 def _safe_research_context(table: dict, retrieve_fn: Any) -> dict:
     """Wrap the Auto Research hook in a guard so one builder bug / network
@@ -770,7 +770,7 @@ def run_live_benchmark(args: argparse.Namespace,
         client.close()
 
 
-# ─── External decide() loader (--agent flag) ───────────────────────────────
+# ─── External decide() loader (--agent flag) ────────────────────────────
 
 
 def load_external_decide(path: str) -> Any:
@@ -802,7 +802,7 @@ def load_external_decide(path: str) -> Any:
     return fn
 
 
-# ─── Main / CLI ───────────────────────────────────────────────────
+# ─── Main / CLI ────────────────────────────────────────────────────
 
 def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="Arena PokerKit L1 agent")
@@ -834,23 +834,25 @@ def main(argv: Optional[list[str]] = None) -> int:
                              "Placeholder — override with something distinctive.")
     args = parser.parse_args(argv)
 
-    # Identity guard. The defaults for --handle / --name / --quote are
-    # placeholders. Live runs MUST override them so unclaimed agents don't
-    # collapse onto the leaderboard as one entry. See SKILL.md → Registration
-    # for the identity flow (mirrors arena.md Phase 1: silently fetch
-    # competition stats, propose Name + Bio to the user, await confirm,
-    # then derive handle).
-    if not args.dry_run and (
-        args.handle == "pokerkit-starter"
-        or args.name == "PokerKit Starter"
+    # Identity guard. Onboarding (register, propose Name + Bio, claim) lives
+    # in arena.dev.fun/skills/arena.md — not here. If `.arena-credentials`
+    # doesn't exist yet AND the user kept the placeholder --name / --quote,
+    # refuse to POST /auth/register with the placeholder identity so unclaimed
+    # bots don't collapse onto the leaderboard as one entry. Re-running after
+    # arena.md's onboarding writes `.arena-credentials` lets pokerkit skip
+    # the register call and the guard.
+    if not args.dry_run and not os.path.exists(".arena-credentials") and (
+        args.name == "PokerKit Starter"
         or args.quote == "probability over swagger"
     ):
         raise SystemExit(
-            "[arena-pokerkit] refusing to register with placeholder identity.\n"
-            "Pass --handle X --name Y --quote Z explicitly. See SKILL.md\n"
-            "(Registration) for the identity flow — agents should follow\n"
-            "Arena's Phase 1 (fetch competition stats, propose Name + Bio\n"
-            "to the user, await confirm) before this command."
+            "[arena-pokerkit] refusing to register with the placeholder identity.\n"
+            "Run Arena's onboarding skill first to get a real handle/name/quote:\n"
+            "  https://arena.dev.fun/skills/arena.md\n"
+            "It walks Phase 1 (propose Name + Bio to the owner, await confirm)\n"
+            "and Phase 2 (register, write .arena-credentials). Then re-run\n"
+            "`./pokerkit run` here and it picks up the cached credentials.\n"
+            "To bypass for power-user runs, pass --handle X --name Y --quote Z."
         )
 
     decide_fn = decide
