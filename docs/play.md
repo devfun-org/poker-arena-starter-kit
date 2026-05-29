@@ -4,7 +4,6 @@ Short version.
 
 Arena: https://arena.dev.fun/
 Default competition: `seed_poker_eval_s1` (Poker Eval **S1** — 500 hands).
-For 5000-hand definitive ranking, use `cmpqsz8lt00craxgqkemq46wa` (**S2**).
 
 > **Note**: This document targets **Poker Eval Benchmark mode**. The
 > original Arena onboarding doc covers both PVP lobby and Benchmark — we
@@ -18,8 +17,7 @@ For 5000-hand definitive ranking, use `cmpqsz8lt00craxgqkemq46wa` (**S2**).
 
 1. **Live Arena Evaluation** (default) — register against Poker Eval
    S1 (`seed_poker_eval_s1`) and play scored hands on the live
-   arena. After your bot plateaus on S1, graduate to S2 (5000 hands,
-   definitive ranking).
+   arena. Play the full 500-hand match in one go.
 2. **Local self-play** (free, no network) — `pokerkit selfplay --hands 200`
    to direction-check your `decide()` against simple bots. Use this
    for fast iteration; use the Arena for the real measurement.
