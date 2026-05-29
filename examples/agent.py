@@ -66,7 +66,7 @@ POLL_JITTER = 0.5
 STATUS_REFRESH_S = 8.0      # background refresh of benchmark/status
 
 
-# ─── Auto Research hook ─────────────────────────────────────────────────────
+# ─── Auto Research hook ─────────────────────────────────────────────
 # Called immediately before decide(table) on every fresh pending table.
 # Default impl is a no-op. Plug in real research by overriding this with:
 #   - examples/research_static_chart.py (runnable preflop chart example)
@@ -82,7 +82,7 @@ def retrieve_solver_context(table: dict) -> dict:
     return {}
 
 
-# ─── Hand strength estimation (treys) ───────────────────────────────────────
+# ─── Hand strength estimation (treys) ───────────────────────────────────
 
 # Preflop equity table — used when treys is unavailable, or as a preflop
 # fallback when there is no time for Monte Carlo.
@@ -164,7 +164,7 @@ def _to_treys(card_str: str) -> str:
     return r + s
 
 
-# ─── decide() — the part builders edit ──────────────────────────────────────
+# ─── decide() — the part builders edit ──────────────────────────────────
 
 def decide(table: dict, deadline_s: float = 10.0,
            research_context: Optional[dict] = None) -> dict:
@@ -339,7 +339,7 @@ def _human_message(action: str, equity: float, pot_odds: float, hole: list[str])
     return action
 
 
-# ─── Live loop (glue — usually don't edit) ──────────────────────────────────
+# ─── Live loop (glue — usually don't edit) ────────────────────────────────
 
 def _safe_research_context(table: dict, retrieve_fn: Any) -> dict:
     """Wrap the Auto Research hook in a guard so one builder bug / network
@@ -770,7 +770,7 @@ def run_live_benchmark(args: argparse.Namespace,
         client.close()
 
 
-# ─── External decide() loader (--agent flag) ────────────────────────────────
+# ─── External decide() loader (--agent flag) ───────────────────────────────
 
 
 def load_external_decide(path: str) -> Any:
@@ -802,7 +802,7 @@ def load_external_decide(path: str) -> Any:
     return fn
 
 
-# ─── Main / CLI ─────────────────────────────────────────────────────────────
+# ─── Main / CLI ───────────────────────────────────────────────────
 
 def main(argv: Optional[list[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="Arena PokerKit L1 agent")
@@ -824,12 +824,34 @@ def main(argv: Optional[list[str]] = None) -> int:
                              "L1 heuristic. Use examples/skeletons/*.py to "
                              "sanity-check your submission pipeline.")
     parser.add_argument("--handle", default="pokerkit-starter",
-                        help="Agent handle for first registration")
+                        help="Agent handle for first registration. "
+                             "Placeholder — override with something distinctive.")
     parser.add_argument("--name", default="PokerKit Starter",
-                        help="Agent display name for first registration")
+                        help="Agent display name shown on the leaderboard. "
+                             "Placeholder — override with something distinctive.")
     parser.add_argument("--quote", default="probability over swagger",
-                        help="Agent quote shown on the leaderboard")
+                        help="Agent quote shown on the leaderboard. "
+                             "Placeholder — override with something distinctive.")
     args = parser.parse_args(argv)
+
+    # Identity guard. The defaults for --handle / --name / --quote are
+    # placeholders. Live runs MUST override them so unclaimed agents don't
+    # collapse onto the leaderboard as one entry. See SKILL.md → Registration
+    # for the identity flow (mirrors arena.md Phase 1: silently fetch
+    # competition stats, propose Name + Bio to the user, await confirm,
+    # then derive handle).
+    if not args.dry_run and (
+        args.handle == "pokerkit-starter"
+        or args.name == "PokerKit Starter"
+        or args.quote == "probability over swagger"
+    ):
+        raise SystemExit(
+            "[arena-pokerkit] refusing to register with placeholder identity.\n"
+            "Pass --handle X --name Y --quote Z explicitly. See SKILL.md\n"
+            "(Registration) for the identity flow — agents should follow\n"
+            "Arena's Phase 1 (fetch competition stats, propose Name + Bio\n"
+            "to the user, await confirm) before this command."
+        )
 
     decide_fn = decide
     if args.agent:
