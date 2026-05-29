@@ -126,9 +126,10 @@ an explicit build instruction up front, shorten to one line and proceed. If
 ## Pre-action confirmation (EVERY Arena run, EVERY L5 iteration)
 
 ```
-🎯 About to register and play {500|5000} hands against the reference panel
-on {arena.dev.fun|arena.dev.fun}. Estimated ~{15 min|2 hr}. This will
-appear on the public leaderboard. {L5 only: This iteration calls
+🎯 About to register and play 500 hands against the reference panel
+on arena.dev.fun. Estimated ~15 min. This will appear on the public
+leaderboard. **This must complete in a single continuous run** —
+disconnecting can timeout the match. {L5 only: This iteration calls
 {OpenAI|Anthropic} — expected cost ~${estimate}. Confirm budget ceiling
 for this iteration only.}
 
