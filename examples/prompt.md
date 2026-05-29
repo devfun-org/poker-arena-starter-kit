@@ -31,8 +31,7 @@ states from examples.
 
 Loop (matches the live poker-eval skill):
   1. POST /api/arena/texas/benchmark/start { competitionId: "seed_poker_eval_s1" }
-     (default competition is Poker Eval **S1** — 500 hands, id above.
-      For 5000-hand definitive ranking, use `cmpqsz8lt00craxgqkemq46wa` (S2).)
+     (default competition is Poker Eval **S1** — 500 hands, id above.)
   2. GET  /api/arena/texas/pending-actions?competitionId=...
      returns { tables: [...] } whenever it is your turn
   3. if tables is non-empty:
