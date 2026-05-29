@@ -25,7 +25,7 @@ network steps you should know about:
   1. `uv sync` (Phase 1, one-time) — downloads Python deps from PyPI
      (~30 sec, ~50MB).
   2. Arena evaluation (Stage 1+, you approve each time) — calls
-     b-arena.dev.fun for the benchmark.
+     arena.dev.fun for the benchmark.
 
 Pre-grant (optional, skips prompts):
   Claude Code: cp .claude/settings.json.example .claude/settings.json
@@ -40,8 +40,8 @@ references/sandbox-recovery.md.
 Step 2 — Silent setup:
 
 ```bash
-git clone https://github.com/chenziz/arena-pokerkit
-cd arena-pokerkit
+git clone https://github.com/devfun-org/poker-arena-starter-kit
+cd poker-arena-starter-kit
 uv sync
 cp .env.example .env    # if read-only sandbox, skip and export
                         # ARENA_API_BASE + ARENA_COMPETITION_ID directly
@@ -237,8 +237,8 @@ Pick: `500` / `5000`. (or `go` / enter → 500)
 ```
 
 Run with the right competition ID:
-- 500-hand: `ARENA_COMPETITION_ID=cmpdk0pt00eawvcaf1es8plw2`
-- 5000-hand: `ARENA_COMPETITION_ID=cmpkdus9200syw8do5644oymp`
+- 500-hand: `ARENA_COMPETITION_ID=seed_poker_eval_s1`
+- 5000-hand: `ARENA_COMPETITION_ID=cmpqsz8lt00craxgqkemq46wa`
 
 Pre-action confirm. Run `./pokerkit run`. On terminal state:
 

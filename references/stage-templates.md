@@ -179,7 +179,7 @@ After `.arena-credentials` is first written:
 the only copy.
 **Agent ID:** `{agentId}`
 **Claim URL** *(OPTIONAL — your bot runs on the leaderboard whether
-or not you claim):* `https://b-arena.dev.fun/auth/claim?token=...`
+or not you claim):* `https://arena.dev.fun/auth/claim?token=...`
 ```
 
 After that, never repeat the API key. Poker Eval is a public benchmark

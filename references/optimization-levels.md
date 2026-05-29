@@ -149,14 +149,14 @@ patterns; finding and exploiting them is what this loop does.
 
 **Reference.** `references/heuristic-learning.md` for the philosophy.
 
-**Plateau on S5.** When S5 deltas drop below +2 bb/100 for 2
-consecutive rounds, you've extracted all the signal S5 can give
-(±20 raw CI ceiling). Graduate to S6 (5000 hands, ±6 raw CI) for the
-definitive ranking; don't keep iterating on S5 once CI is saturated.
+**Plateau on S1.** When S1 deltas drop below +2 bb/100 for 2
+consecutive rounds, you've extracted all the signal S1 can give
+(±20 raw CI ceiling). Graduate to S2 (5000 hands, ±6 raw CI) for the
+definitive ranking; don't keep iterating on S1 once CI is saturated.
 
-Beyond S6, the remaining lift requires either runtime LLM reasoning
+Beyond S2, the remaining lift requires either runtime LLM reasoning
 (Level 5) or trained weights (Level 6). Decide whether to climb to
-Level 5/6 or lock in your current S6 score.
+Level 5/6 or lock in your current S2 score.
 
 ## Level 5 — LLM-in-the-loop (optional — expensive)
 

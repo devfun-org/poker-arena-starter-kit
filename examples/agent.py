@@ -710,9 +710,9 @@ def run_live_benchmark(args: argparse.Namespace,
         print(
             "ERROR: no competition specified.\n\n"
             "Either:\n"
-            "  cp .env.example .env       # has Poker Eval S5 ID pre-filled\n"
+            "  cp .env.example .env       # has Poker Eval S1 ID pre-filled\n"
             "or:\n"
-            "  uv run examples/agent.py --competition-id cmpdk0pt00eawvcaf1es8plw2",
+            "  uv run examples/agent.py --competition-id seed_poker_eval_s1",
             file=sys.stderr,
         )
         return 2

@@ -27,7 +27,7 @@ from typing import Any, Optional
 import httpx
 
 
-DEFAULT_BASE = "https://b-arena.dev.fun/api/arena"
+DEFAULT_BASE = "https://arena.dev.fun/api/arena"
 MOCK_BASE = "http://mock.local/api/arena"  # --dry-run rebinds to this
 CREDS_PATH = Path(".arena-credentials")
 # Holds the previous creds while we attempt re-registration. Restored if
@@ -98,8 +98,8 @@ REQUIRED_ENDPOINTS = (
 )
 
 # Cached-from-build-time terminal phases. We overwrite this with introspection
-# values when available. Listed in poker-eval.md as "may be stale, derived
-# from cached examples" — introspection wins.
+# values when available. Listed in references/poker-eval-arena.md as "may be
+# stale, derived from cached examples" — introspection wins.
 FALLBACK_TERMINAL_PHASES = ("completed", "cancelled", "failed")
 FALLBACK_TERMINAL_STATUSES = ("Completed", "Cancelled", "Failed")
 

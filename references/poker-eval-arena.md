@@ -11,12 +11,13 @@ User-facing labels → internal name + competition_id:
 
 | User-facing label                 | Internal | Hands | Time    | CI (raw bb/100) | Use for                                          | competition_id                  |
 |---                                |---       |---    |---      |---              |---                                               |---                              |
-| **500-hand quick test** (default) | S5       | 500   | ~15 min | ±20 bb/100      | HL loop iteration, daily direction-check         | `cmpdk0pt00eawvcaf1es8plw2`     |
-| **5000-hand anytime-ready test**  | S6       | 5000  | ~2 hr   | ±6 bb/100       | Definitive ranking once you feel confident       | `cmpkdus9200syw8do5644oymp`     |
+| **500-hand quick test** (default) | S1       | 500   | ~15 min | ±20 bb/100      | HL loop iteration, daily direction-check         | `seed_poker_eval_s1`     |
+| **5000-hand anytime-ready test**  | S2       | 5000  | ~2 hr   | ±6 bb/100       | Definitive ranking once you feel confident       | `cmpqsz8lt00craxgqkemq46wa`     |
 
-> **NEVER show "S5" / "S6" to the user.** They're internal labels only.
-> When narrating, say "500-hand quick test" or "5000-hand anytime-ready
-> test" — the same hand-count labels the user picks with `500` / `5000`.
+> **S1 / S2 are user-facing labels** on arena.dev.fun — say them freely.
+> Pair with hand counts when introducing the choice: "S1 (500 hands,
+> ~15 min)" / "S2 (5000 hands, ~2 hr)". The hand-count labels (`500` /
+> `5000`) remain valid aliases.
 
 Both share the same reference panel. The 10× hand count delivers ~3×
 tighter CI — that's the only difference. Pick the 500-hand test for
@@ -47,7 +48,7 @@ CI until they land.
 - **Arena Poker Eval benchmark** — the SERVER-SIDE 500-hand match
   against the reference panel.
 - `pokerkit run` is the client that polls Arena and submits your
-  `decide()`'s actions. The 500-hand size is fixed by Arena (S5
+  `decide()`'s actions. The 500-hand size is fixed by Arena (S1
   season). The client's `--max-hands` flag lets you stop the CLIENT
   early; the SERVER-SIDE match stays open in `waiting_user` state
   and you can resume by running `pokerkit run` again.
@@ -61,11 +62,11 @@ the local in-process bots — Arena is for real eval, not sandbox.
 ## Base URL
 
 ```
-${ARENA_API_BASE:-https://b-arena.dev.fun/api/arena}
+${ARENA_API_BASE:-https://arena.dev.fun/api/arena}
 ```
 
-Beta default. Switch to `https://arena.dev.fun/api/arena` for
-production by setting `ARENA_API_BASE` in `.env`.
+Override with `ARENA_API_BASE` in `.env` if you need to point at a
+different Arena deployment.
 
 ## Auth
 
@@ -135,8 +136,8 @@ Plus optional/post-match:
   branch in arena.md does not fire here.
 - ❌ **Multi-competition picking** — the user has already chosen Poker
   Eval (by reaching this skill). The `competitionId` lives in
-  `.env` (`ARENA_COMPETITION_ID`, defaults to S5 =
-  `cmpdk0pt00eawvcaf1es8plw2`). Override with `--competition-id`.
+  `.env` (`ARENA_COMPETITION_ID`, defaults to S1 =
+  `seed_poker_eval_s1`). Override with `--competition-id`.
 
 ## Action shape
 

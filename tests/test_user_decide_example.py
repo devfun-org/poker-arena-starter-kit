@@ -5,7 +5,7 @@
     into your own `tests/test_my_decide.py`.
 
 Why this exists: iterating "did my new bluff logic work?" through a
-30-minute live S5 match is glacial. The scenarios in `examples/testing.py`
+30-minute live S1 match is glacial. The scenarios in `examples/testing.py`
 give you 20 canonical spots in the exact shape the live API returns,
 so a full pass costs ~50ms.
 """

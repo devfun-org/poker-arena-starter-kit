@@ -300,12 +300,12 @@ def test_registration_idempotent_on_rerun():
 
 @respx.mock
 def test_dry_run_does_not_hit_production():
-    """Any call to b-arena.dev.fun must NOT be mocked here — confirm dry-run
-    only touches the mock base URL."""
+    """Any call to arena.dev.fun (production) must NOT be mocked here —
+    confirm dry-run only touches the mock base URL."""
     Path(".arena-credentials").write_text(json.dumps({
         "agentId": "x", "apiKey": "y",
     }))
-    leak = respx.route(host="b-arena.dev.fun").mock(
+    leak = respx.route(host="arena.dev.fun").mock(
         return_value=httpx.Response(599)
     )
 

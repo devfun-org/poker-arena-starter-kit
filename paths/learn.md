@@ -110,7 +110,7 @@ inspection, agent will touch these for you later if you pick `build`
 or `iterate`:
 
 ```
-GitHub: https://github.com/chenziz/arena-pokerkit
+GitHub: https://github.com/devfun-org/poker-arena-starter-kit
 
 Key files:
   SKILL.md                          — top-level entrypoint
