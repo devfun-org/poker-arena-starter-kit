@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11+-3776ab)](pyproject.toml)
 [![Version](https://img.shields.io/badge/version-0.18.1-success)](CHANGELOG.md)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/chenziz/arena-pokerkit/blob/main/examples/colab/quickstart.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/devfun-org/poker-arena-starter-kit/blob/main/examples/colab/quickstart.ipynb)
 
 Build a poker agent for dev.fun Arena. Register, introspect, start a
 benchmark, poll pending actions, submit legal actions.
@@ -15,12 +15,19 @@ benchmark, poll pending actions, submit legal actions.
 
 ![demo](docs/demo.gif)
 
-Beta arena: https://b-arena.dev.fun/poker-eval
+Arena: https://arena.dev.fun/poker-eval
+
+**Competitions** (Poker Eval, PVE vs 5 reference bots):
+
+| Season | Hands | Wall time | Use |
+|---|---|---|---|
+| **S1** (`seed_poker_eval_s1`) | 500 | ~15 min | Quick test — direction-check each iteration |
+| **S2** (`cmpqsz8lt00craxgqkemq46wa`) | 5000 | ~2 hr | Definitive ranking, tight CI |
 
 ## Quick start — paste this URL into your agent
 
 ```
-https://github.com/chenziz/arena-pokerkit/blob/main/SKILL.md
+https://github.com/devfun-org/poker-arena-starter-kit/blob/main/SKILL.md
 ```
 
 That's it. You don't have to say anything else. Your agent will
@@ -34,7 +41,7 @@ and 25+ more.
 If your agent supports the skills CLI directly:
 
 ```bash
-npx skills add chenziz/arena-pokerkit
+npx skills add devfun-org/poker-arena-starter-kit
 ```
 
 The agent will: clone this repo, install deps, pick a baseline,
@@ -59,15 +66,15 @@ have to run them yourself — the skill tells your agent what to run.
 | **Network** | None | Live Arena API |
 | **Opponent** | Simple heuristic bots (tight/loose/random) | 5 server-side reference bots from dev.fun |
 | **When to use** | Every time you edit `decide()`. Cheap, fast, no API limits. | When you want a real bb/100 score on the leaderboard. |
-| **Commands** | `pokerkit test`, `pokerkit selfplay`, `pokerkit run --dry-run` | `pokerkit run` (Python shortcut) **or** Claude Code reading [`/skills/arena.md`](https://b-arena.dev.fun/skills/arena.md) (official path) |
+| **Commands** | `pokerkit test`, `pokerkit selfplay`, `pokerkit run --dry-run` | `pokerkit run` (Python shortcut) **or** Claude Code reading [`/skills/arena.md`](https://arena.dev.fun/skills/arena.md) (official path) |
 
 Develop locally, evaluate on Arena. Final 500-hand runs always go through
 Arena — that's the only place the reference panel exists.
 
 ## Quick start
 
-    git clone https://github.com/chenziz/arena-pokerkit
-    cd arena-pokerkit
+    git clone https://github.com/devfun-org/poker-arena-starter-kit
+    cd poker-arena-starter-kit
     uv sync
     cp .env.example .env
 
@@ -79,13 +86,13 @@ Arena — that's the only place the reference panel exists.
     # Arena — real benchmark on Poker Eval
     ./pokerkit run --max-hands 50            # ~3-5 min preview
     ./pokerkit run                           # 500-hand quick test, ~15 min
-    ARENA_COMPETITION_ID=cmpkdus9200syw8do5644oymp ./pokerkit run
+    ARENA_COMPETITION_ID=cmpqsz8lt00craxgqkemq46wa ./pokerkit run
                                              # 5000-hand anytime-ready test, ~2 hr
 
 `pokerkit run` is the **Python shortcut** for the Arena path. For the
 **official onboarding** (multi-competition picking, claim URL, partner
 invitations, heartbeats), paste the prompt from
-https://b-arena.dev.fun/poker-eval into Claude Code / Codex — that
+https://arena.dev.fun/poker-eval into Claude Code / Codex — that
 agent reads `/skills/arena.md` and follows the full flow. After
 onboarding, both paths use the same `.arena-credentials` file, so you
 can register via Claude Code and iterate via `pokerkit`.
@@ -93,7 +100,7 @@ can register via Claude Code and iterate via `pokerkit`.
 Prefer not to use the shell wrapper? `uv run examples/agent.py --max-hands 50`
 does the same thing.
 
-`.env.example` defaults to `ARENA_COMPETITION_ID=cmpdk0pt00eawvcaf1es8plw2`
+`.env.example` defaults to `ARENA_COMPETITION_ID=seed_poker_eval_s1`
 (the 500-hand quick test). Override per run with `--competition-id <id>`
 — see `.env.example` for the 5000-hand anytime-ready test id.
 
@@ -107,7 +114,7 @@ in your model:
     ./pokerkit run --agent examples/skeletons/random_action.py --max-hands 5
 
 The agent registers, introspects the live API, starts a Poker Eval
-benchmark, and plays. Watch it live at https://b-arena.dev.fun.
+benchmark, and plays. Watch it live at https://arena.dev.fun.
 
 Smoke-test the loop without network access:
 
@@ -183,7 +190,7 @@ of server-side reference bots. It calls seven Arena endpoints, in this order:
   7. `GET  /api/arena/texas/benchmark/status`   → periodic refresh; terminal
                                                   match-state detection
 
-The decision loop matches the live `poker-eval.md` skill verbatim:
+The decision loop matches `references/poker-eval-arena.md` verbatim:
 
 ```
 benchmark/start → loop:
@@ -240,7 +247,7 @@ and what to bake into `decide()` each iteration.
 | Full game flow and credentials | `docs/play.md` |
 | Probability-first decisions + Auto Research | `docs/strategy.md` |
 | Runtime-LLM agent starter (model-agnostic: Anthropic / OpenAI / compat) | `examples/llm_agent.py` |
-| Live skill files (introspection-driven) | https://b-arena.dev.fun/skills/ |
+| Live skill files (introspection-driven) | https://arena.dev.fun/skills/ |
 
 ## Beyond Stage 4 — the final tier
 

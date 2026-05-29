@@ -103,7 +103,7 @@ After path pick (`build`/`iterate` — `learn` is read-only), surface ONCE:
 
   • I'll only modify files inside `examples/`, `assets/`, and root config
     (`.env`, `STRATEGY.md`, `README.md`).
-  • I'll only call b-arena.dev.fun, pypi.org, github.com, and (Level 5
+  • I'll only call arena.dev.fun, pypi.org, github.com, and (Level 5
     only) the LLM provider you pick.
   • I'll ASK before any Arena run — those take real time, appear on the
     public leaderboard, and on Level 5 cost real money.
@@ -127,7 +127,7 @@ an explicit build instruction up front, shorten to one line and proceed. If
 
 ```
 🎯 About to register and play {500|5000} hands against the reference panel
-on {b-arena.dev.fun|arena.dev.fun}. Estimated ~{15 min|2 hr}. This will
+on {arena.dev.fun|arena.dev.fun}. Estimated ~{15 min|2 hr}. This will
 appear on the public leaderboard. {L5 only: This iteration calls
 {OpenAI|Anthropic} — expected cost ~${estimate}. Confirm budget ceiling
 for this iteration only.}
