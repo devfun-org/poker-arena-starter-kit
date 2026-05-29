@@ -164,7 +164,7 @@ math flips. **Sizing > hand strength.**
 ★: Dry K-high = preflop raiser's playground. Small (33%) c-bet prints.
 ```
 
-**Q4 — River bluff-catcher: JJ on T♠7♠4♦A♦9♠ vs 70%-pot bet.**
+**Q4 — River bluff-catcher: JJ on T♠7♠4♦9♠ vs 70%-pot bet.**
 ```
 | Option   | EV (vs real) | EV (vs GTO) | Reason |
 |---|---|---|---|
@@ -229,16 +229,14 @@ Save `style_label` to `.pokerkit-milestones.json`. Unlock
 ```
 🎯 Ready for Arena?
 
-  • 500-hand quick test           — fast feedback (~15 min). CI ~±20.
-                                    For direction checks during HL loop.
-  • 5000-hand anytime-ready test  — definitive ranking (~2 hr). CI ~±6.
+  • 500-hand match — ~15 min, CI ~±20. Must complete in a single
+                     continuous run — disconnecting mid-match can
+                     timeout the match.
 
-Pick: `500` / `5000`. (or `go` / enter → 500)
+Type `go` to proceed.
 ```
 
-Run with the right competition ID:
-- 500-hand: `ARENA_COMPETITION_ID=seed_poker_eval_s1`
-- 5000-hand: `ARENA_COMPETITION_ID=cmpqsz8lt00craxgqkemq46wa`
+Run with: `ARENA_COMPETITION_ID=seed_poker_eval_s1`
 
 Pre-action confirm. Run `./pokerkit run`. On terminal state:
 
@@ -442,9 +440,9 @@ Three options at every boundary:
 rounds used. ~30 min wall clock elapsed." Ask user before continuing
 past round 6.
 
-**Plateau rule.** If last 2 deltas both < +2 bb/100, offer the
-5000-hand anytime-ready test to lock in CI. Apply band-climb /
-overdue-climb rules from `references/steps.md`.
+**Plateau rule.** If last 2 deltas both < +2 bb/100, surface the
+plateau message. Apply band-climb / overdue-climb rules from
+`references/steps.md`.
 
 ### Beyond Stage 4 — mention once at end
 
@@ -458,6 +456,5 @@ Slumbot / PokerBench. ~1 week + GPU.
 
 - Skip the visible-artifact rule (every stage produces real files)
 - Claim a score without a real Arena run
-- Auto-graduate to 5000-hand (requires opt-in after plateau)
 - Silent escalate to Level 5/6 (explicit opt-in + cost ceiling required)
-- Run `--max-hands 50` previews — only full 500 or 5000-hand matches
+- Run `--max-hands 50` previews — only full 500-hand matches
