@@ -62,7 +62,7 @@ have to run them yourself — the skill tells your agent what to run.
 | | **Local dev loop** | **Arena Evaluation** |
 |---|---|---|
 | **Purpose** | Fast iteration on `decide()` while developing | Real benchmark — scores against Arena's reference panel |
-| **Speed** | 50 ms (unit tests) — 1 s per 200 hands (self-play) | 3-5 min (50 hands) — 30-40 min (full 500-hand match) |
+| **Speed** | 50 ms (unit tests) — 1 s per 200 hands (self-play) | ~15 min (S1 / 500 hands) — ~2 hr (S2 / 5000 hands) |
 | **Network** | None | Live Arena API |
 | **Opponent** | Simple heuristic bots (tight/loose/random) | 5 server-side reference bots from dev.fun |
 | **When to use** | Every time you edit `decide()`. Cheap, fast, no API limits. | When you want a real bb/100 score on the leaderboard. |
