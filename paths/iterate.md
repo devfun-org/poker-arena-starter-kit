@@ -105,14 +105,13 @@ most recent as baseline. Else offer the **standard Arena picker**
 (identical wording across paths):
 
 ```
-Need a baseline score before iterating. Pick one:
+Need a baseline score before iterating.
 
-  • 500-hand quick test           — ~15 min, ±20 CI. Recommended for
-                                    HL loop (you re-run after each patch).
-  • 5000-hand anytime-ready test  — ~2 hr, ±6 CI. Only if you want tight
-                                    CI before patching.
+  • 500-hand match — ~15 min, ±20 CI. Must complete in a single
+                     continuous run — disconnecting mid-match can
+                     timeout the match.
 
-Most users pick 500. Pick: `500` / `5000`. (or `go` / enter → 500)
+Type `go` to proceed.
 ```
 
 Pre-action confirm. Run `./pokerkit run`. On terminal state:
@@ -208,12 +207,6 @@ If last 2 deltas both < +2 bb/100, surface:
 ✓ Plateau detected — 2 consecutive rounds with lift within CI noise.
   Your bot has stabilized around {curr} bb/100.
 
-🔓 5000-hand anytime-ready test unlocked.
-
-Recommend graduating to 5000-hand (CI ±6 instead of ±18) to lock in
-your definitive number.
-
-  • `5000`   — definitive ranking, ~2 hr
   • `500`    — one more 500-hand round
   • `stop`   — lock in {curr}
 ```
@@ -239,7 +232,7 @@ Never silently escalate. Re-confirm ceiling every iteration.
 
 ## Final lock-in
 
-When the user types `stop` or hits the 5000-hand graduation:
+When the user types `stop`:
 
 ```
 📊 Final Stage 4 score: {curr} ± {ci} bb/100 ({hands} hands, {n} HL rounds)
@@ -268,10 +261,9 @@ TexasSolver / Slumbot / PokerBench).
 Offer optional final step:
 
 ```
-Optional: lock in your number with a 5000-hand run (tightens CI from
-±{wide} to ~±5.5). Or submit current bot to leaderboard at {curr}.
+Submit current bot to leaderboard at {curr}.
 
-Type `5000` / `submit` / `done`.
+Type `submit` / `done`.
 ```
 
 ---
@@ -282,7 +274,6 @@ Type `5000` / `submit` / `done`.
 - Skip the visible-artifact rule (every round produces
   failure_report.txt + decide() diff)
 - Skip the WHY framing on first entry (even if jumping straight to HL)
-- Auto-graduate to 5000-hand (requires opt-in after plateau)
 - Run more than 6 HL rounds without budget check-in
 - Silent escalate to L5/L6 — explicit opt-in + per-iteration cost
   ceiling required
