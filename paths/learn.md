@@ -47,7 +47,7 @@ no buttons, no LLM required.
 
 ---
 
-## Section 2 — bb/100 and the two test sizes
+## Section 2 — bb/100 and the test size
 
 ```
 **bb/100** = big blinds won (or lost) per 100 hands. The standard
@@ -59,16 +59,13 @@ poker metric, used because session P/L is noisy.
   -200       = random play
   +50        = natural ceiling vs current panel
 
-Two test sizes against Arena's reference panel — same game, different
-sample size, different confidence interval:
+Test size against Arena's reference panel:
 
-  500-hand quick test    ~15 min   ±20 bb/100 CI    direction-checks
-  5000-hand anytime-ready ~2 hr    ±6 bb/100 CI    locked-in ranking
+  500-hand match    ~15 min   ±20 bb/100 CI
 
 500 hands is noisy (±20 means a bot at -10 and one at +5 might be
-equal). Fine for "am I improving?", not for "am I top-10?". 5000 is
-the definitive number. The kit picks the right one for you — you
-don't memorize competition IDs.
+equal). Run the full 500 hands in one continuous run — disconnecting
+mid-match can timeout the match and invalidate your score.
 ```
 
 ---
@@ -154,7 +151,7 @@ Type one.
 
 | User asks | Quick answer | Deeper file |
 |---|---|---|
-| "what are the two test sizes?" | 500-hand = ~15 min, ±20 CI. 5000-hand = ~2 hr, ±6 CI. Same panel. | `references/poker-eval-arena.md` |
+| "what's the test size?" | 500-hand = ~15 min, ±20 CI. Run the full 500 hands in one go. | `references/poker-eval-arena.md` |
 | "what's an Auto Research source?" | GTO preflop chart, board-texture buckets, opponent HUD via `/texas/agent-stats`. All offline lookups; zero LLM calls at runtime. | `references/optimization-levels.md` Level 3 |
 | "what's Curriculum / HL loop?" | Stage 4 loop: run 500-hand → analyze → patch one losing pattern → re-run. To plateau. | `references/heuristic-learning.md` |
 | "can I use an LLM in decide()?" | Yes — Level 5 (paid, slower). Most strong bots are pure Python. L5 is on top of Stage 4. | `references/optimization-levels.md` L5 |
