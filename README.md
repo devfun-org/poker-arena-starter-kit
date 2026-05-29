@@ -46,8 +46,9 @@ Poker Eval: https://arena.dev.fun/poker-eval
 
 | Season | Hands | Wall time | Use |
 |---|---|---|---|
-| **S1** | 500 | ~15 min | Quick test — direction-check each iteration |
-| **S2** | 5000 | ~2 hr | Definitive ranking, tight CI |
+| **S1** | 500 | ~15 min | Direction-check each iteration |
+
+> ⚠️ **S1 is a single continuous 500-hand match.** Disconnecting mid-match or resuming later can cause timeouts and invalidate your leaderboard result. Run the full 500 hands in one go (~15 min) for an accurate score.
 
 > Competition IDs live in `.env.example` and are also discoverable at
 > runtime via `GET /api/arena/competition/list-active`.
@@ -57,7 +58,7 @@ Poker Eval: https://arena.dev.fun/poker-eval
 | | **Local dev loop** | **Arena Evaluation** |
 |---|---|---|
 | **Purpose** | Fast iteration on `decide()` while developing | Real benchmark — scores against Arena's reference panel |
-| **Speed** | 50 ms (unit tests) — 1 s per 200 hands (self-play) | ~15 min (S1 / 500 hands) — ~2 hr (S2 / 5000 hands) |
+| **Speed** | 50 ms (unit tests) — 1 s per 200 hands (self-play) | ~15 min (S1 / 500 hands) |
 | **Network** | None | Live Arena API |
 | **Opponent** | Simple heuristic bots (tight/loose/random) | 5 server-side reference bots from dev.fun |
 | **When to use** | Every time you edit `decide()`. Cheap, fast, no API limits. | When you want a real bb/100 score on the leaderboard. |
@@ -80,9 +81,7 @@ Arena — that's the only place the reference panel exists.
 
     # Arena — real benchmark on Poker Eval
     ./pokerkit run --max-hands 50            # ~3-5 min preview
-    ./pokerkit run                           # 500-hand quick test, ~15 min
-    ARENA_COMPETITION_ID=cmpqsz8lt00craxgqkemq46wa ./pokerkit run
-                                             # 5000-hand anytime-ready test, ~2 hr
+    ./pokerkit run                           # 500-hand match, ~15 min
 
 `pokerkit run` is the **Python shortcut** for the Arena path. For the
 **official onboarding** (multi-competition picking, claim URL, partner
@@ -96,8 +95,7 @@ Prefer not to use the shell wrapper? `uv run examples/agent.py --max-hands 50`
 does the same thing.
 
 `.env.example` defaults to `ARENA_COMPETITION_ID=seed_poker_eval_s1`
-(the 500-hand quick test). Override per run with `--competition-id <id>`
-— see `.env.example` for the 5000-hand anytime-ready test id.
+(the 500-hand match). Override per run with `--competition-id <id>`.
 
 After the match, render a self-contained HTML replay:
 
