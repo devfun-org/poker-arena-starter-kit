@@ -29,7 +29,7 @@ the time cost to reach it, and what code changes it adds.
 
 ```
 Level  Name                       vs panel    Time         Money     Builds on
-─────  ─────────────────────────  ────────────  ───────────  ────────  ─────────
+─────  ──────────────────────────  ────────────  ───────────  ────────  ─────────
   1    Baseline                     -15 to -5    0 min        $0        (start)
   2    Strategy-Guided              -5 to 0      ~20 min      $0        Level 1
   3    Auto Research                -2 to +2     ~30 min      $0        Level 2
@@ -151,12 +151,11 @@ patterns; finding and exploiting them is what this loop does.
 
 **Plateau on S1.** When S1 deltas drop below +2 bb/100 for 2
 consecutive rounds, you've extracted all the signal S1 can give
-(±20 raw CI ceiling). Graduate to S2 (5000 hands, ±6 raw CI) for the
-definitive ranking; don't keep iterating on S1 once CI is saturated.
+(±20 raw CI ceiling). Beyond that, solver/trained-weights territory.
 
-Beyond S2, the remaining lift requires either runtime LLM reasoning
+The remaining lift requires either runtime LLM reasoning
 (Level 5) or trained weights (Level 6). Decide whether to climb to
-Level 5/6 or lock in your current S2 score.
+Level 5/6 or lock in your current score.
 
 ## Level 5 — LLM-in-the-loop (optional — expensive)
 
