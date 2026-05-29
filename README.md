@@ -5,8 +5,31 @@
 [![Version](https://img.shields.io/badge/version-0.18.1-success)](CHANGELOG.md)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/devfun-org/poker-arena-starter-kit/blob/main/examples/colab/quickstart.ipynb)
 
-Build a poker agent for dev.fun Arena. Register, introspect, start a
-benchmark, poll pending actions, submit legal actions.
+A skill that turns any coding agent into a poker bot builder for
+dev.fun Arena's Poker Eval benchmark.
+
+## Give it to your agent
+
+Paste this URL into your agent's chat:
+
+```
+https://github.com/devfun-org/poker-arena-starter-kit/blob/main/SKILL.md
+```
+
+Or install via the skills CLI:
+
+```bash
+npx skills add devfun-org/poker-arena-starter-kit
+```
+
+Then say "go". The agent reads `SKILL.md`, asks you 1-2 strategy
+questions, writes your `decide()` function, runs local validation + an
+Arena preview, iterates on failures, and submits the final 500-hand
+match when you approve. Total ~30-60 min, mostly autonomous.
+
+Works with **Hermes, OpenClaw, and Zo Computer** (most use today), plus
+Claude Code, Codex CLI, Cursor, Gemini CLI, Copilot, OpenHands, and
+others (Aider, Windsurf, Continue).
 
 > **Naming.** The product is **Arena Starter Kit**. The CLI binary
 > stays `pokerkit` (so `./pokerkit run` still works). "PokerKit" by
@@ -15,9 +38,11 @@ benchmark, poll pending actions, submit legal actions.
 
 ![demo](docs/demo.gif)
 
+## Where your agent plays
+
 Poker Eval: https://arena.dev.fun/poker-eval
 
-**Competitions** (Poker Eval, PVE vs 5 reference bots):
+**Competitions** (PVE vs 5 reference bots):
 
 | Season | Hands | Wall time | Use |
 |---|---|---|---|
@@ -26,33 +51,6 @@ Poker Eval: https://arena.dev.fun/poker-eval
 
 > Competition IDs live in `.env.example` and are also discoverable at
 > runtime via `GET /api/arena/competition/list-active`.
-
-## Quick start — paste this URL into your agent
-
-```
-https://github.com/devfun-org/poker-arena-starter-kit/blob/main/SKILL.md
-```
-
-That's it. Your agent reads the kit and starts driving once you say "go".
-
-Works with most coding agents. **Hermes, OpenClaw, and Zo Computer** see
-the most use today. It also works with Claude Code, Codex CLI, Cursor,
-Gemini CLI, Copilot, OpenHands, and others (Aider, Windsurf, Continue).
-
-If your agent supports the skills CLI directly:
-
-```bash
-npx skills add devfun-org/poker-arena-starter-kit
-```
-
-The agent will: clone this repo, install deps, pick a baseline,
-ask you 1-2 questions about strategy taste, write your `decide()`
-function, run local validation + Arena preview, iterate based on
-failure analysis, and submit the final 500-hand match when you
-approve. Total ~30-60 min, mostly autonomous.
-
-Manual CLI instructions below are for human inspection. You don't
-have to run them yourself — the skill tells your agent what to run.
 
 ## Two paths — pick the right one for the job
 
@@ -63,6 +61,7 @@ have to run them yourself — the skill tells your agent what to run.
 | **Network** | None | Live Arena API |
 | **Opponent** | Simple heuristic bots (tight/loose/random) | 5 server-side reference bots from dev.fun |
 | **When to use** | Every time you edit `decide()`. Cheap, fast, no API limits. | When you want a real bb/100 score on the leaderboard. |
+| **Commands** | `pokerkit test`, `pokerkit selfplay`, `pokerkit run --dry-run` | `pokerkit run` |
 
 Develop locally, evaluate on Arena. Final 500-hand runs always go through
 Arena — that's the only place the reference panel exists.
@@ -82,6 +81,8 @@ Arena — that's the only place the reference panel exists.
     # Arena — real benchmark on Poker Eval
     ./pokerkit run --max-hands 50            # ~3-5 min preview
     ./pokerkit run                           # 500-hand quick test, ~15 min
+    ARENA_COMPETITION_ID=cmpqsz8lt00craxgqkemq46wa ./pokerkit run
+                                             # 5000-hand anytime-ready test, ~2 hr
 
 `pokerkit run` is the **Python shortcut** for the Arena path. For the
 **official onboarding** (multi-competition picking, claim URL, partner
@@ -94,8 +95,9 @@ can register via Claude Code and iterate via `pokerkit`.
 Prefer not to use the shell wrapper? `uv run examples/agent.py --max-hands 50`
 does the same thing.
 
-Override the competition per run with `--competition-id <id>` — see
-`.env.example` for available ids.
+`.env.example` defaults to `ARENA_COMPETITION_ID=seed_poker_eval_s1`
+(the 500-hand quick test). Override per run with `--competition-id <id>`
+— see `.env.example` for the 5000-hand anytime-ready test id.
 
 After the match, render a self-contained HTML replay:
 
@@ -248,6 +250,9 @@ This starter kit is for training your poker agent locally. Plug it
 into Poker Eval on arena.dev.fun when ready — currently a public
 warm-up where agents are evaluated on a shared leaderboard. **No
 rewards yet.**
+
+The full Arena opens soon. When it does, your agent graduates from the
+warm-up into live competitions.
 
 ## Beyond Stage 4 — the final tier
 
