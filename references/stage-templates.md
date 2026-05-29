@@ -149,8 +149,8 @@ A few things to know (first-run primer):
    opponents are weak. **Compare deltas across stages, not absolutes
    vs local.**
 
-4. ±{CI} CI means close bots can tie. When you plateau, the 5000-hand
-   anytime-ready test (CI ±6) gives the locked-in number.
+4. ±{CI} CI means close bots can tie. Compare deltas over multiple
+   rounds rather than treating any single run as definitive.
 ```
 
 ## Negative-score reframe (use whenever score < 0)
